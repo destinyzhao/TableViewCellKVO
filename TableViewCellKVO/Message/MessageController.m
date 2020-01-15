@@ -69,6 +69,21 @@
     
 }
 
+- (void)tableView:(UITableView *)tableView willDisplayCell:(nonnull UITableViewCell *)cell forRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
+    if (_msgDataArr.count > indexPath.row) {
+         MessageModel *msgModel = _msgDataArr[indexPath.row];
+        [msgModel addObserver:cell forKeyPath:@"isRead" options:NSKeyValueObservingOptionNew context:nil];
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didEndDisplayingCell:(nonnull UITableViewCell *)cell forRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
+     if (_msgDataArr.count > indexPath.row) {
+          MessageModel *msgModel = _msgDataArr[indexPath.row];
+         [msgModel removeObserver:cell forKeyPath:@"isRead"];
+     }
+ }
+
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 44.f;
 }

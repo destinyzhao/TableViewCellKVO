@@ -32,8 +32,6 @@
     }else{
          self.bradgeView.hidden = NO;
     }
-    
-    [msgModel addObserver:self forKeyPath:@"isRead" options:NSKeyValueObservingOptionNew context:nil];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{
